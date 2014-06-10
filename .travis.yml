@@ -1,23 +1,31 @@
+
 language: php
+
 php:
   - 5.5
   - 5.6
   - hhvm
+
 env:
   matrix:
     - SYMFONY_VERSION=2.4.*
     - SYMFONY_VERSION=2.5.*
-    - SYMFONY_VERSION=dev-master
+    # dev build is currently taking forever on hhvm so we are skipping for now
+    #- SYMFONY_VERSION=dev-master
+
+  global:
+    # Config for test-reporter
+    secure: "CnjuNxTV6yfzHTZHJTXgEUXsyKTJkU+JgCvfftuW91GPA/6oUj3QIT64Ozm2xanAUsQxXhmJUM5xfv90yUXN9Yj77MBbeRD+wBvPd5JqjVYd6kqn6Qma7Qi6VLIHoG26TTOBEiOJjw6lUpIE5N8qTvDCqv1LytU8wYOxCd6OCsg="
 
 before_script:
   - composer self-update
   - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
   - composer update --prefer-source
 
-script: phpunit --coverage-text
+script:
+  - phpunit --coverage-text --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/test-reporter
 
 notifications:
-  email:
-    - steven@devtrw.com
   flowdock:
     secure: RJyC2+xYZNQvAk4+O/+r4qiN4CPzO4+Er0YDlcpZcBOcK2xlriPjpgInV8nrSYvuQYMPzk8i+n283U45sAkM/wTyz8O644sxcmV8YcjxqYL1JfHWk8Xjl8BK7c7LQ+j0bm68rIfvXhCMff6YxGU5k0OJWEOo8sKDBfWU8DD7cZs=
