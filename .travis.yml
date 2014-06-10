@@ -1,15 +1,13 @@
 language: php
-
 php:
-    - 5.5
-    - 5.6
-    - hhvm
-
+  - 5.5
+  - 5.6
+  - hhvm
 env:
-  - SYMFONY_VERSION=2.4.*
-  - SYMFONY_VERSION=2.5.*
-  - SYMFONY_VERSION=dev-master
-
+  matrix:
+    - SYMFONY_VERSION=2.4.*
+    - SYMFONY_VERSION=2.5.*
+    - SYMFONY_VERSION=dev-master
 
 before_script:
   - composer self-update
@@ -21,3 +19,5 @@ script: phpunit --coverage-text
 notifications:
   email:
     - steven@devtrw.com
+  flowdock:
+    secure: RJyC2+xYZNQvAk4+O/+r4qiN4CPzO4+Er0YDlcpZcBOcK2xlriPjpgInV8nrSYvuQYMPzk8i+n283U45sAkM/wTyz8O644sxcmV8YcjxqYL1JfHWk8Xjl8BK7c7LQ+j0bm68rIfvXhCMff6YxGU5k0OJWEOo8sKDBfWU8DD7cZs=
