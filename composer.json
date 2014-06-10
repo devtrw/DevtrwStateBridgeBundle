@@ -19,8 +19,5 @@
     "psr-4": {
       "Devtrw\\StateBridgeBundle\\": "src"
     }
-  },
-  "config": {
-    "bin-dir": "bin"
   }
 }
