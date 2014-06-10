@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Symfony2PluginSettings">
+    <option name="objectSignatureTypeProvider" value="true" />
+    <option name="methodSignatureSettings">
+      <list>
+        <method_signature_settings CallTo="\PHPUnit_Framework_TestCase" MethodName="getMock" ReferenceProviderName="Class" />
+      </list>
+    </option>
+  </component>
+</project>
+
