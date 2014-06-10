@@ -1,7 +1,23 @@
 language: php
+
 php:
     - 5.5
     - 5.6
     - hhvm
 
-before_script: composer self-update && composer install --dev
+env:
+  - SYMFONY_VERSION=2.4.*
+  - SYMFONY_VERSION=2.5.*
+  - SYMFONY_VERSION=dev-master
+
+
+before_script:
+  - composer self-update
+  - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
+  - composer update --prefer-source
+
+script: phpunit --coverage-text
+
+notifications:
+  email:
+    - steven@devtrw.com

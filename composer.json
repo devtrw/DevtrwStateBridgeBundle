@@ -2,9 +2,6 @@
   "name": "devtrw/devtrw-state-bridge-bundle",
   "description": "Provides a basic framework for sharing application state from a Symfony2 backend to a javascript (AngularJS in particular) frontend.",
   "type": "symfony-bundle",
-  "require-dev": {
-    "phpunit/phpunit": "~4.1.2"
-  },
   "license": "MIT",
   "authors": [
     {
@@ -13,7 +10,11 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": "~2.0"
+    "php": ">=5.5",
+    "symfony/symfony": ">=2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*"
   },
   "autoload": {
     "psr-4": {
