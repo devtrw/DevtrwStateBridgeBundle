@@ -1,5 +1,5 @@
 {
-  "name": "devtrw/devtrw-state-bridge-bundle",
+  "name": "devtrw/state-bridge-bundle",
   "description": "Provides a basic framework for sharing application state from a Symfony2 backend to a javascript (AngularJS in particular) frontend.",
   "type": "symfony-bundle",
   "license": "MIT",
