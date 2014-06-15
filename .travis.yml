@@ -14,8 +14,11 @@ env:
     #- SYMFONY_VERSION=dev-master
 
   global:
-    # Config for test-reporter
-    secure: "CnjuNxTV6yfzHTZHJTXgEUXsyKTJkU+JgCvfftuW91GPA/6oUj3QIT64Ozm2xanAUsQxXhmJUM5xfv90yUXN9Yj77MBbeRD+wBvPd5JqjVYd6kqn6Qma7Qi6VLIHoG26TTOBEiOJjw6lUpIE5N8qTvDCqv1LytU8wYOxCd6OCsg="
+      # Config for test-reporter -
+      # Note: the reason for this being commented out is that there is an issue with
+      #       the reporter accepting the SSL cert at code climate that I don't have
+      #       to look into right now
+    # secure: "CnjuNxTV6yfzHTZHJTXgEUXsyKTJkU+JgCvfftuW91GPA/6oUj3QIT64Ozm2xanAUsQxXhmJUM5xfv90yUXN9Yj77MBbeRD+wBvPd5JqjVYd6kqn6Qma7Qi6VLIHoG26TTOBEiOJjw6lUpIE5N8qTvDCqv1LytU8wYOxCd6OCsg="
 
 before_script:
   - composer self-update
@@ -24,7 +27,7 @@ before_script:
 
 script:
   - phpunit --coverage-text --coverage-clover build/logs/clover.xml
-  - ./vendor/bin/test-reporter
+  # - ./vendor/bin/test-reporter
 
 notifications:
   flowdock:
