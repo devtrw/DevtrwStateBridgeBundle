@@ -42,9 +42,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * TODO: Is there a way to self reference in the config so we don't have to do
-     * this hackish recursion w/ depth limit?
-     *
      * @param int $currentMenuDepth
      *
      * @return NodeDefinition

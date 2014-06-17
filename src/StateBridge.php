@@ -61,7 +61,6 @@ class StateBridge
      * @return array
      *
      * @throws MissingMandatoryParametersException
-     * TODO Raise exception on invalid state name
      *
      * @author Steven Nance <steven@devtrw.com>
      */
