@@ -7,6 +7,7 @@
  */
 namespace Devtrw\StateBridgeBundle;
 
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -24,14 +25,6 @@ class StateBridge
      * @var \Symfony\Component\Security\Core\SecurityContextInterface
      */
     private $security;
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine
-     */
-    private $templating;
-    /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
-     */
-    private $translator;
 
     /**
      * @param array                    $configuration
@@ -74,6 +67,15 @@ class StateBridge
      */
     protected function getStateConfig($stateName)
     {
+        if (!array_key_exists($stateName, $this->configuration)) {
+            throw new InvalidConfigurationException(
+                sprintf(
+                    'The requested state "%s" does not exist. Configured states are: ',
+                    $stateName,
+                    implode(', ', array_keys($this->configuration))
+                )
+            );
+        }
         return $this->configuration[$stateName];
     }
 
@@ -93,7 +95,7 @@ class StateBridge
 
         /**
          * Move array keys into "key" attribute of config which greatly simplifies processing outside of PHP
-         * FIXME:It's escaping me but I'm pretty sure you can do this in one line with some combination of
+         * It's escaping me but I'm pretty sure you can do this in one line with some combination of
          * array_flip/array_keys
          */
         $initialChildren = $bridgedState['children'];
