@@ -1,48 +1,51 @@
 devtrw_states:
-  primary:
-    abstract: true
-    route_prefix: primary_state_
-    children:
-      primary_1:
-        route: one
-      primary_2:
-        route: two
-      primary_3_child_state:
-        static: true
-        route_prefix: three_child_state_
-        children:
-          child_state_1:
-            route: one
-          child_state_2:
-            route_prefix: two_child_state_
-            children:
-              child_state_1:
-                route: one
-  restricted:
-    children:
-      one:
-        access: 'hasRole("ROLE_FOO")'
-        route: foo_bar
-#      active_item_states:
-#        abstract: true
-#        children:
-#          submenu_header:
-#            abstract: true
-#            children:
-#              submenu_item_1-1:
-#                route: submenu_item_1_1
-#              submenu_item_1-2:
-#                route: submenu_item_1_2
-#              submenu_item_1-3:
-#                route: submenu_item_1_3
-#          grouped_link:
-#            route: grouped_link_1
-#
-#  company:
-#    static: true
-#    children:
-#      dashboard:
-#        route: company_dashboard
-#      info:
-#        route: company_info
+  states:
+    primary:
+      abstract: true
+      route_prefix: primary_state_
+      children:
+        primary_1:
+          route: one
+        primary_2:
+          route: two
+        primary_3_child_state:
+          static: true
+          route_prefix: three_child_state_
+          children:
+            child_state_1:
+              route: one
+            child_state_2:
+              route_prefix: two_child_state_
+              children:
+                child_state_1:
+                  route: one
+    restricted:
+      children:
+        one:
+          access: 'hasRole("ROLE_FOO")'
+          route: foo_bar
+    with_entity:
+      entity: Devtrw\SomeBundle\Entity\SomeEntity
+  #      active_item_states:
+  #        abstract: true
+  #        children:
+  #          submenu_header:
+  #            abstract: true
+  #            children:
+  #              submenu_item_1-1:
+  #                route: submenu_item_1_1
+  #              submenu_item_1-2:
+  #                route: submenu_item_1_2
+  #              submenu_item_1-3:
+  #                route: submenu_item_1_3
+  #          grouped_link:
+  #            route: grouped_link_1
+  #
+  #  company:
+  #    static: true
+  #    children:
+  #      dashboard:
+  #        route: company_dashboard
+  #      info:
+  #        route: company_info
 

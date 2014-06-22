@@ -22,19 +22,24 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('devtrw_states');
+        $rootNode = $treeBuilder->root('devtrw_state_bridge');
 
         // @formatter:off
         $rootNode
-            ->useAttributeAsKey('name')
-            ->prototype('array')
-                ->children()
-                    ->scalarNode('route_prefix')->end()
-                    ->booleanNode('abstract')->defaultFalse()->end()
-                    ->booleanNode('static')->defaultFalse()->end()
-                    ->append($this->stateNode())
+            ->children()
+            ->arrayNode('states')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
+                    ->children()
+                        ->scalarNode('route_prefix')->end()
+                        ->scalarNode('entity')->defaultNull()->end()
+                        ->booleanNode('abstract')->defaultFalse()->end()
+                        ->booleanNode('static')->defaultFalse()->end()
+                        ->append($this->stateNode())
+                    ->end()
                 ->end()
             ->end()
+            ->scalarNode('jsonp_callback_fn')->defaultValue('loadStates')->end()
         ->end();
         // @formatter:on
 

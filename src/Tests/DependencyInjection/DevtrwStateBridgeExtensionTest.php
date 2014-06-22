@@ -42,9 +42,24 @@ class DevtrwStateBridgeExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->load($testConfig, $this->container);
     }
 
+    public function testJsonpCallbackFnDefault()
+    {
+        $expectedParameterName = 'devtrw_state_bridge.jsonp_callback_fn';
+        $this->assertTrue(
+            $this->container->hasParameter($expectedParameterName),
+            sprintf('The "%s" parameter should be set in the DIC container', $expectedParameterName)
+        );
+    }
+
     public function testRoutePrefixProcessing()
     {
-        $parsed               = $this->container->getParameter('devtrw_states')['primary'];
+        $expectedParameterName = 'devtrw_state_bridge.states';
+        $this->assertTrue(
+            $this->container->hasParameter($expectedParameterName),
+            sprintf('The "%s" parameter should be set in the DIC container', $expectedParameterName)
+        );
+        $configureStates = $this->container->getParameter($expectedParameterName);
+        $parsed               = $configureStates['primary'];
         $parsedSubmenu        = $parsed['children']['primary_3_child_state'];
         $parsedSubitemSubmenu = $parsedSubmenu['children']['child_state_2'];
 
