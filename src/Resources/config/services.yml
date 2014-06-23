@@ -2,17 +2,18 @@ parameters:
   devtrw_state_bridge.state_bridge.class    : Devtrw\StateBridgeBundle\StateBridge
   devtrw_state_bridge.controller.state.class: Devtrw\StateBridgeBundle\Controller\StateController
   devtrw_state_bridge.jsop_callback_fn      : ~ # configured in extension
+  devtrw_state_bridge.states                : ~ # configured in extension
 
 services:
   devtrw_state_bridge.state_bridge:
     class    : "%devtrw_state_bridge.state_bridge.class%"
     arguments:
-      - "%devtrw_states%"
+      - "%devtrw_state_bridge.states%"
       - @security.context
       - @doctrine.orm.default_entity_manager
 
   devtrw_state_bridg.controller.state:
     class    : "%devtrw_state_bridge.controller.state.class%"
     arguments:
-      - @devtrw_state_bridg.state_bridge
+      - @devtrw_state_bridge.state_bridge
       - "%devtrw_state_bridge.jsop_callback_fn%"
