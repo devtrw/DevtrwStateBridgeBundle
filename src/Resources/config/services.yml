@@ -1,8 +1,9 @@
 parameters:
   devtrw_state_bridge.state_bridge.class    : Devtrw\StateBridgeBundle\StateBridge
   devtrw_state_bridge.controller.state.class: Devtrw\StateBridgeBundle\Controller\StateController
-  devtrw_state_bridge.jsop_callback_fn      : ~ # configured in extension
-  devtrw_state_bridge.states                : ~ # configured in extension
+  # configured in extension
+  # devtrw_state_bridge.jsop_callback_fn      : ~
+  # devtrw_state_bridge.states                : ~
 
 services:
   devtrw_state_bridge.state_bridge:

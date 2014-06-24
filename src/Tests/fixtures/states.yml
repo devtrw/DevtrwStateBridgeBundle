@@ -1,4 +1,4 @@
-devtrw_states:
+devtrw_state_bridge:
   states:
     primary:
       abstract: true

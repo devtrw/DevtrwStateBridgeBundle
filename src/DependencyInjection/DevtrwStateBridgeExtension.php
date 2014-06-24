@@ -19,15 +19,15 @@ class DevtrwStateBridgeExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $configs);
+        $configuration   = new Configuration();
+        $processedConfig = $this->processConfiguration($configuration, $configs);
 
-        foreach($config['states'] as $stateName => &$state) {
+        foreach($processedConfig['states'] as $stateName => &$state) {
             $this->applyRoutePrefixes($state);
         }
-        $container->setParameter('devtrw_state_bridge.states', $config['states']);
+        $container->setParameter('devtrw_state_bridge.states', $processedConfig['states']);
 
-        $container->setParameter('devtrw_state_bridge.jsonp_callback_fn', $config['jsonp_callback_fn']);
+        $container->setParameter('devtrw_state_bridge.jsonp_callback_fn', $processedConfig['jsonp_callback_fn']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
