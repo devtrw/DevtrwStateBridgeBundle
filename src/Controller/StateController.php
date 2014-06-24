@@ -17,8 +17,6 @@ use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 /**
  * Class StateController
  *
- * @Sensio\Route(service="repx.controller.state")
- *
  * @author  Steven Nance <steven@devtrw.com>
  * @package Repx\TrackBundle\Controller
  */
