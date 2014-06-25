@@ -7,22 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
- * To learn more
-
-
-
-
-
-
-
-
-
-
-
-*
-*@see http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class
-
  * @author  Steven Nance <steven@devtrw.com>
  * @package Devtrw\StateBridgeBundle\DependencyInjection
  */
@@ -31,7 +15,9 @@ class Configuration implements ConfigurationInterface
     const MAX_NESTED_STATES = 5;
 
     /**
-     * {@inheritDoc}
+     * This is the class that validates and merges configuration from your app/config files
+     * To learn more
+     * {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
      */
     public function getConfigTreeBuilder()
     {
@@ -69,11 +55,7 @@ class Configuration implements ConfigurationInterface
     {
         $childrenTreeBuilder = new TreeBuilder();
         if (self::MAX_NESTED_STATES <= $currentMenuDepth) {
-            // @formatter:off
-            $children = $childrenTreeBuilder
-                ->root('EOL', 'scalar')
-            ->end();
-            // @formatter:on
+            $children = $childrenTreeBuilder->root('EOL', 'scalar');
         } else {
             $currentMenuDepth++;
             $children = $this->stateNode($currentMenuDepth);
