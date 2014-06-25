@@ -11,6 +11,7 @@ services:
     arguments:
       - "%devtrw_state_bridge.states%"
       - @security.context
+      - @jms_serializer.serializer
       - @doctrine.orm.default_entity_manager
 
   devtrw_state_bridge.controller.state:
