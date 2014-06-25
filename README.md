@@ -1,7 +1,8 @@
 DevtrwStateBridgeBundle
 =======================
 [![Build Status](http://img.shields.io/travis/devtrw/DevtrwStateBridgeBundle.svg?style=flat)](http://travis-ci.org/devtrw/DevtrwStateBridgeBundle)
-[![Code Climate](http://img.shields.io/codeclimate/github/devtrw/DevtrwStateBridgeBundle.svg?style=flat)](https://codeclimate.com/github/devtrw/DevtrwStateBridgeBundle)
+[![Code Quality](http://img.shields.io/scrutinizer/g/devtrw/DevtrwStateBridgeBundle.svg?style=flat)](https://scrutinizer-ci.com/g/devtrw/DevtrwStateBridgeBundle/?branch=master)
+[![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/devtrw/DevtrwStateBridgeBundle.svg?style=flat)](https://scrutinizer-ci.com/g/devtrw/DevtrwStateBridgeBundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/20dac64f-4e8e-4825-830e-08069094b497/mini.png)](https://insight.sensiolabs.com/projects/20dac64f-4e8e-4825-830e-08069094b497)
 
 This bundle provides a basic framework for dynamically creating 
