@@ -32,7 +32,13 @@ class DevtrwStateBridgeExtension extends Extension
         $loader->load('services.yml');
     }
 
-    private function applyRoutePrefixes(&$config, $routePrefix = '')
+    /**
+     * @param array[] &$config
+     * @param string  $routePrefix
+     *
+     * @author Steven Nance <steven@devtrw.com>
+     */
+    private function applyRoutePrefixes(array &$config, $routePrefix = '')
     {
         if (array_key_exists('route_prefix', $config)) {
             $routePrefix .= $config['route_prefix'];

@@ -52,7 +52,7 @@ class StateBridge
      * @param null|int $entityId        The ID of the entity for which the
      *                                  state is being requested
      *
-     * @return Array
+     * @return array[]
      * @author Steven Nance <steven@devtrw.com>
      */
     public function getBridgedState($stateName, $entityId = null)
@@ -70,7 +70,7 @@ class StateBridge
      *
      * @param string $stateName
      *
-     * @return array
+     * @return array[]
      * @throws MissingStateException
      * @author Steven Nance <steven@devtrw.com>
      */
@@ -86,9 +86,9 @@ class StateBridge
     /**
      * Recursively format the state array tree
      *
-     * @param array<array> $bridgedState
+     * @param array[] &$bridgedState
      *
-     * @return array<array>
+     * @return array[]
      *
      * @author Steven Nance <steven@devtrw.com>
      */
