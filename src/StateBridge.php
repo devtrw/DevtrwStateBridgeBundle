@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class StateBridge
 {
     /**
-     * @var array<array>
+     * @var array<string,array>
      */
     protected $configuration;
     /**
@@ -36,7 +36,7 @@ class StateBridge
     protected $serializer;
 
     /**
-     * @param array<array>             $configuration
+     * @param array<string,array>      $configuration
      * @param SecurityContextInterface $security
      * @param Serializer               $serializer
      * @param ObjectManager            $om
@@ -60,7 +60,7 @@ class StateBridge
      * @param null|int $entityId        The ID of the entity for which the
      *                                  state is being requested
      *
-     * @return array<array>
+     * @return array<string,array>
      * @author Steven Nance <steven@devtrw.com>
      */
     public function getBridgedState($stateName, $entityId = null)
@@ -78,7 +78,7 @@ class StateBridge
      *
      * @param string $stateName
      *
-     * @return array<array>
+     * @return array<string,array>
      * @throws MissingStateException
      * @author Steven Nance <steven@devtrw.com>
      */
@@ -94,9 +94,9 @@ class StateBridge
     /**
      * Recursively format the state array tree
      *
-     * @param array<array> $bridgedState
+     * @param array<string,array> $bridgedState
      *
-     * @return array<array>
+     * @return array<string,array>
      *
      * @author Steven Nance <steven@devtrw.com>
      */
@@ -156,7 +156,7 @@ class StateBridge
      *
      * @param Object $entity
      *
-     * @return array<array>
+     * @return array<string,array>
      * @author Steven Nance <steven@devtrw.com>
      */
     protected function serializeEntityToArray($entity)

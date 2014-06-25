@@ -55,8 +55,8 @@ class StateController
     }
 
     /**
-     * @param array<array> $states
-     * @param Request      $request
+     * @param array<int,array> $states
+     * @param Request          $request
      *
      * @return JsonResponse
      * @author Steven Nance <steven@devtrw.com>
