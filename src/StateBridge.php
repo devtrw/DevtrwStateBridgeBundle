@@ -68,7 +68,7 @@ class StateBridge
     /**
      * Gets the initial state config by name from the processed configuration files
      *
-     * @param $stateName
+     * @param string $stateName
      *
      * @return array
      * @throws MissingStateException
