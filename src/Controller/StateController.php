@@ -33,7 +33,7 @@ class StateController
      */
     public function __construct(StateBridge $stateBridge, $jsonpCallbackFn)
     {
-        $this->stateBridge = $stateBridge;
+        $this->stateBridge     = $stateBridge;
         $this->jsonpCallbackFn = $jsonpCallbackFn;
     }
 
@@ -48,7 +48,7 @@ class StateController
 
     private function buildResponse(array $states, Request $request)
     {
-        $responseArray = ['states' => $states];
+        $responseArray   = ['states' => $states];
         $requestedFormat = $request->getRequestFormat('json');
 
         switch ($requestedFormat) {

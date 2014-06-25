@@ -9,8 +9,15 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * This is the class that validates and merges configuration from your app/config files
  * To learn more
- *
- * @see http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class
+
+
+
+
+*
+*@see http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class
+
+ * @author  Steven Nance <steven@devtrw.com>
+ * @package Devtrw\StateBridgeBundle\DependencyInjection
  */
 class Configuration implements ConfigurationInterface
 {
@@ -22,7 +29,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('devtrw_state_bridge');
+        $rootNode    = $treeBuilder->root('devtrw_state_bridge');
 
         // @formatter:off
         $rootNode
@@ -63,7 +70,7 @@ class Configuration implements ConfigurationInterface
         }
 
         $treeBuilder = new TreeBuilder();
-        $stateNode = $treeBuilder->root('children');
+        $stateNode   = $treeBuilder->root('children');
 
         // @formatter:off
         $stateNode

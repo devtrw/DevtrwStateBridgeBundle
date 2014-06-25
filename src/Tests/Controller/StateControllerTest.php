@@ -114,11 +114,9 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $stateName
+     * @param string   $stateName
      * @param int|null $stateId
-
-
-*
+     *
      * @return StateController
      * @author Steven Nance <steven@devtrw.com>
      */

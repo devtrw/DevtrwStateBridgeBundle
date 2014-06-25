@@ -35,7 +35,7 @@ class DevtrwStateBridgeExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $testConfig = Yaml::parse(file_get_contents(__DIR__ . '/../fixtures/states.yml'));
+        $testConfig      = Yaml::parse(file_get_contents(__DIR__ . '/../fixtures/states.yml'));
         $this->container = new ContainerBuilder();
         $extension       = new DevtrwStateBridgeExtension();
         $extension->load($testConfig, $this->container);
@@ -57,7 +57,7 @@ class DevtrwStateBridgeExtensionTest extends \PHPUnit_Framework_TestCase
             $this->container->hasParameter($expectedParameterName),
             sprintf('The "%s" parameter should be set in the DIC container', $expectedParameterName)
         );
-        $configureStates = $this->container->getParameter($expectedParameterName);
+        $configureStates      = $this->container->getParameter($expectedParameterName);
         $parsed               = $configureStates['primary'];
         $parsedSubmenu        = $parsed['children']['primary_3_child_state'];
         $parsedSubitemSubmenu = $parsedSubmenu['children']['child_state_2'];

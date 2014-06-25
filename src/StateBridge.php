@@ -86,14 +86,15 @@ class StateBridge
     /**
      * Recursively format the state array tree
      *
-     * @param array $bridgedState
+     * @param array<array> $bridgedState
      *
-     * @return array
+     * @return array<array>
+     *
      * @author Steven Nance <steven@devtrw.com>
      */
     protected function processChildElements(array &$bridgedState)
     {
-        if (empty($bridgedState['children'])) {
+        if (true === empty($bridgedState['children'])) {
             return $bridgedState;
         }
 
