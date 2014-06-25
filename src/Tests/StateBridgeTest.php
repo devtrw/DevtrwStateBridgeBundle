@@ -52,7 +52,7 @@ class StateBridgeTest extends \PHPUnit_Framework_TestCase
 
     public static function setupBeforeClass()
     {
-        $config = Yaml::parse(file_get_contents(__DIR__ . '/fixtures/states.yml'));
+        $config    = Yaml::parse(file_get_contents(__DIR__ . '/fixtures/states.yml'));
         $container = new ContainerBuilder();
         $extension = new DevtrwStateBridgeExtension();
         $extension->load($config, $container);

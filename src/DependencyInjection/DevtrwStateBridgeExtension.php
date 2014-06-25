@@ -36,7 +36,7 @@ class DevtrwStateBridgeExtension extends Extension
     }
 
     /**
-     * @param array[] &$config
+     * @param array[] $config
      * @param string  $routePrefix
      *
      * @author Steven Nance <steven@devtrw.com>

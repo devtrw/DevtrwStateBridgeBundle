@@ -19,13 +19,21 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class StateBridge
 {
     /**
+     * @var array[]
+     */
+    protected $configuration;
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectManager
+     */
+    protected $om;
+    /**
      * @var \Symfony\Component\Security\Core\SecurityContextInterface
      */
     protected $security;
     /**
      * @var \JMS\Serializer\Serializer
      */
-    private $serializer;
+    protected $serializer;
 
     /**
      * @param array[]                  $configuration
@@ -76,7 +84,7 @@ class StateBridge
      */
     protected function getStateConfig($stateName)
     {
-        if (!array_key_exists($stateName, $this->configuration)) {
+        if (false === array_key_exists($stateName, $this->configuration)) {
             throw new MissingStateException($stateName, array_keys($this->configuration));
         }
 
@@ -86,7 +94,7 @@ class StateBridge
     /**
      * Recursively format the state array tree
      *
-     * @param array[] &$bridgedState
+     * @param array[] $bridgedState
      *
      * @return array[]
      *
@@ -148,7 +156,7 @@ class StateBridge
      *
      * @param Object $entity
      *
-     * @return array
+     * @return array[]
      * @author Steven Nance <steven@devtrw.com>
      */
     protected function serializeEntityToArray($entity)
