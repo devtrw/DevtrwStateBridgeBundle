@@ -19,8 +19,8 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 class MissingStateException extends InvalidConfigurationException
 {
     /**
-     * @param string $requestedState
-     * @param array  $availableStates
+     * @param string   $requestedState
+     * @param string[] $availableStates
      */
     public function __construct($requestedState, array $availableStates)
     {

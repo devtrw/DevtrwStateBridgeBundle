@@ -28,7 +28,7 @@ class StateBridge
     private $serializer;
 
     /**
-     * @param array                    $configuration
+     * @param array[]                  $configuration
      * @param SecurityContextInterface $security
      * @param Serializer               $serializer
      * @param ObjectManager            $om

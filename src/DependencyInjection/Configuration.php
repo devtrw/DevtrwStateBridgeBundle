@@ -2,13 +2,20 @@
 
 namespace Devtrw\StateBridgeBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
  * To learn more
+
+
+
+
+
+
+
 
 
 
@@ -56,14 +63,17 @@ class Configuration implements ConfigurationInterface
     /**
      * @param int $currentMenuDepth
      *
-     * @return NodeDefinition
+     * @return ArrayNodeDefinition
      */
     private function stateNode($currentMenuDepth = 0)
     {
         $childrenTreeBuilder = new TreeBuilder();
         if (self::MAX_NESTED_STATES <= $currentMenuDepth) {
-            $children = $childrenTreeBuilder->root('EOL', 'scalar');
-            $children->end();
+            // @formatter:off
+            $children = $childrenTreeBuilder
+                ->root('EOL', 'scalar')
+            ->end();
+            // @formatter:on
         } else {
             $currentMenuDepth++;
             $children = $this->stateNode($currentMenuDepth);

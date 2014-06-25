@@ -14,7 +14,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class DevtrwStateBridgeExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * @param array[]          $configs
+     * @param ContainerBuilder $container
+     *
+     * @author Steven Nance <steven@devtrw.com>
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -40,17 +43,17 @@ class DevtrwStateBridgeExtension extends Extension
      */
     private function applyRoutePrefixes(array &$config, $routePrefix = '')
     {
-        if (array_key_exists('route_prefix', $config)) {
+        if (true === array_key_exists('route_prefix', $config)) {
             $routePrefix .= $config['route_prefix'];
             unset($config['route_prefix']);
         }
 
-        if (empty($config['children'])) {
+        if (true === empty($config['children'])) {
             return;
         }
 
         foreach ($config['children'] as &$child) {
-            if (!empty($child['route'])) {
+            if (false === empty($child['route'])) {
                 $child['route'] = $routePrefix . $child['route'];
             }
             $this->applyRoutePrefixes($child, $routePrefix);

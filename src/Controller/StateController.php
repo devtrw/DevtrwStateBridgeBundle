@@ -37,6 +37,14 @@ class StateController
         $this->jsonpCallbackFn = $jsonpCallbackFn;
     }
 
+    /**
+     * @param string   $name
+     * @param Request  $request
+     * @param int|null $id
+     *
+     * @return JsonResponse
+     * @author Steven Nance <steven@devtrw.com>
+     */
     public function indexAction($name, Request $request, $id = null)
     {
         $states = [
@@ -46,6 +54,13 @@ class StateController
         return $this->buildResponse($states, $request);
     }
 
+    /**
+     * @param array[] $states
+     * @param Request $request
+     *
+     * @return JsonResponse
+     * @author Steven Nance <steven@devtrw.com>
+     */
     private function buildResponse(array $states, Request $request)
     {
         $responseArray   = ['states' => $states];
