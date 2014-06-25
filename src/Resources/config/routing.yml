@@ -1,21 +1,18 @@
 devtrw_state_bridge_get_entity_state:
-  path: /state/{name}/{id}.{_format}
-  defaults:
-    _controller: devtrw_state_bridge.controller.state:indexAction
-    name       : primary
-    format     : jsonp
-  requirements:
-    _format: xml|json|jsonp
-    id     : \d+
-
-devtrw_state_bridge_get_state:
-  path: /state/{name}.{_format}
+  path:         /state/{name}/{id}.{_format}
+  requirements: { _format: xml|json|jsonp, id: \d+ }
   defaults:
     _controller: devtrw_state_bridge.controller.state:indexAction
     _format    : jsonp
     name       : primary
-  requirements:
-    format: xml|json|jsonp
+
+devtrw_state_bridge_get_state:
+  path:         /state/{name}.{_format}
+  requirements: { format: xml|json|jsonp }
+  defaults:
+    _controller: devtrw_state_bridge.controller.state:indexAction
+    _format    : jsonp
+    name       : primary
 
 
 
