@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class DevtrwStateBridgeExtension extends Extension
 {
     /**
-     * @param array[]          $configs
+     * @param array<array>     $configs
      * @param ContainerBuilder $container
      *
      * @author Steven Nance <steven@devtrw.com>
@@ -36,8 +36,8 @@ class DevtrwStateBridgeExtension extends Extension
     }
 
     /**
-     * @param array[] $config
-     * @param string  $routePrefix
+     * @param array<array> $config
+     * @param string       $routePrefix
      *
      * @author Steven Nance <steven@devtrw.com>
      */

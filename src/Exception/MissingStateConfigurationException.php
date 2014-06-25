@@ -20,7 +20,7 @@ class MissingStateConfigurationException extends InvalidConfigurationException
 {
     /**
      * @param string   $missingConfigKey
-     * @param array[]  $actualConfiguration
+     * @param array<array>  $actualConfiguration
      */
     public function __construct($missingConfigKey, array $actualConfiguration)
     {
