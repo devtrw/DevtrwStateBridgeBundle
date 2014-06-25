@@ -1,7 +1,6 @@
 <?php
 /**
  * Copyright (c) Steven Nance <steven@devtrw.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
@@ -30,7 +29,7 @@ class StateController
 
     /**
      * @param StateBridge $stateBridge
-     * @param string       $jsonpCallbackFn The function to set for JSONP responses.
+     * @param string      $jsonpCallbackFn The function to set for JSONP responses.
      */
     public function __construct(StateBridge $stateBridge, $jsonpCallbackFn)
     {
@@ -49,15 +48,17 @@ class StateController
 
     private function buildResponse(array $states, Request $request)
     {
-        $responseArray   = [ 'states' => $states ];
+        $responseArray = ['states' => $states];
         $requestedFormat = $request->getRequestFormat('json');
 
         switch ($requestedFormat) {
-            case 'json': $response = new JsonResponse($responseArray); break;
+            case 'json':
+                $response = new JsonResponse($responseArray);
+                break;
 
             case 'jsonp':
                 $response = new JsonResponse($responseArray);
-                $response->setCallback($this->jsonpCallbackFn);;
+                $response->setCallback($this->jsonpCallbackFn);
                 break;
 
             default:
@@ -66,6 +67,5 @@ class StateController
         }
 
         return $response;
-
     }
 }

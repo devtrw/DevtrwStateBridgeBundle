@@ -84,43 +84,6 @@ class StateBridge
     }
 
     /**
-     * @param int   $entityId
-     * @param array &$stateConfig
-     *
-     * @throws MissingStateConfigurationException
-     * @author Steven Nance <steven@devtrw.com>
-     */
-    protected function processEntityDetails($entityId, array &$stateConfig)
-    {
-        if (null === $entityId) {
-            return;
-        } else if (null === $stateConfig['entity']) {
-            throw new MissingStateConfigurationException('entity', $stateConfig);
-        }
-
-        $entity = $this->om->find($stateConfig['entity'], $entityId);
-        $stateConfig['name']   = $stateConfig['name'] . '_' . $entityId;
-        $stateConfig['entity'] = $this->serializeEntityToArray($entity);
-    }
-
-    /**
-     * Serializes the entity to json using the JMS serializer. Then converts it to an associative array using
-     * json_decode. The dual conversion is necessary since the JMS Serializer does not currently support serializing
-     * to an array and we don't want to nest a json string within the output response.
-     *
-     * @param Object $entity
-     *
-     * @return array
-     * @author Steven Nance <steven@devtrw.com>
-     */
-    protected function serializeEntityToArray($entity)
-    {
-        $asJson = $this->serializer->serialize($entity, 'json');
-
-        return json_decode($asJson, true);
-    }
-
-    /**
      * Recursively format the state array tree
      *
      * @param array $bridgedState
@@ -153,5 +116,44 @@ class StateBridge
         }
 
         return $bridgedState;
+    }
+
+    /**
+     * @param int   $entityId
+     * @param array &$stateConfig
+     *
+     * @throws MissingStateConfigurationException
+     * @author Steven Nance <steven@devtrw.com>
+     */
+    protected function processEntityDetails($entityId, array &$stateConfig)
+    {
+        if (null === $entityId) {
+            return;
+        } else {
+            if (null === $stateConfig['entity']) {
+                throw new MissingStateConfigurationException('entity', $stateConfig);
+            }
+        }
+
+        $entity                = $this->om->find($stateConfig['entity'], $entityId);
+        $stateConfig['name']   = $stateConfig['name'] . '_' . $entityId;
+        $stateConfig['entity'] = $this->serializeEntityToArray($entity);
+    }
+
+    /**
+     * Serializes the entity to json using the JMS serializer. Then converts it to an associative array using
+     * json_decode. The dual conversion is necessary since the JMS Serializer does not currently support serializing
+     * to an array and we don't want to nest a json string within the output response.
+     *
+     * @param Object $entity
+     *
+     * @return array
+     * @author Steven Nance <steven@devtrw.com>
+     */
+    protected function serializeEntityToArray($entity)
+    {
+        $asJson = $this->serializer->serialize($entity, 'json');
+
+        return json_decode($asJson, true);
     }
 }

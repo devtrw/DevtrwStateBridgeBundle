@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration
- *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
 class DevtrwStateBridgeExtension extends Extension
@@ -22,14 +21,14 @@ class DevtrwStateBridgeExtension extends Extension
         $configuration   = new Configuration();
         $processedConfig = $this->processConfiguration($configuration, $configs);
 
-        foreach($processedConfig['states'] as $stateName => &$state) {
+        foreach ($processedConfig['states'] as $stateName => &$state) {
             $this->applyRoutePrefixes($state);
         }
         $container->setParameter('devtrw_state_bridge.states', $processedConfig['states']);
 
         $container->setParameter('devtrw_state_bridge.jsonp_callback_fn', $processedConfig['jsonp_callback_fn']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
 

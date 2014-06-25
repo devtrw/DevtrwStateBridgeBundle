@@ -1,7 +1,6 @@
 <?php
 /**
  * Copyright (c) Steven Nance <steven@devtrw.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
@@ -9,8 +8,8 @@
  */
 namespace Devtrw\StateBridgeBundle\Tests\Controller;
 
-use Devtrw\StateBridgeBundle\StateBridge;
 use Devtrw\StateBridgeBundle\Controller\StateController;
+use Devtrw\StateBridgeBundle\StateBridge;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +20,6 @@ use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
  *
  * @author  Steven Nance <steven@devtrw.com>
  * @package Devtrw\StateBridgeBundle\Tests\Controller
- *
  * @group   functional
  */
 class StateControllerTest extends \PHPUnit_Framework_TestCase
@@ -42,14 +40,13 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->stateConfigMock = [
-            'foo' => [ 'bar' => 'baz' ],
-            'baz' => [ 'bar' => 'foo' ]
+            'foo' => ['bar' => 'baz'],
+            'baz' => ['bar' => 'foo']
         ];
         $this->stateBridgeMock = $this->getMockBuilder(StateBridge::class)
             ->disableOriginalConstructor()
             ->setMethods(['getBridgedState'])
-            ->getMock()
-        ;
+            ->getMock();
     }
 
     public function testExceptionOnUnsupportedMediaType()
@@ -77,7 +74,7 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
             'The JSONP response should set the callback to the value passed into the StateController constructor'
         );
 
-        $responseJson = substr($responseContent, $callbackFnLength +1, -2);
+        $responseJson = substr($responseContent, $callbackFnLength + 1, -2);
         $this->assertResponseJsonFormattedCorrectly('jsonp', $responseJson);
     }
 
@@ -89,7 +86,7 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
             sprintf('JSON response for the "%s" format should be valid JSON. Actual: %s', $format, $jsonString)
         );
         $this->assertEquals(
-            ['states' => [ $this->stateConfigMock ] ],
+            ['states' => [$this->stateConfigMock]],
             $responseArray,
             sprintf(
                 'The content of JSON responses for the "%s" format should contain the state returned from the ' .
@@ -104,7 +101,6 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
      * @param string|null $expectedResponseInstance
      *
      * @return Response|JsonResponse
-     *
      * @author Steven Nance <steven@devtrw.com>
      */
     private function assertReturnType($requestFormat, $expectedResponseInstance = null)
@@ -120,7 +116,9 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $stateName
      * @param int|null $stateId
-     *
+
+
+*
      * @return StateController
      * @author Steven Nance <steven@devtrw.com>
      */
@@ -130,8 +128,7 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getBridgedState')
             ->with($stateName, $stateId)
-            ->will($this->returnValue($this->stateConfigMock))
-        ;
+            ->will($this->returnValue($this->stateConfigMock));
 
         return new StateController($this->stateBridgeMock, $this->jsonpCallback);
     }

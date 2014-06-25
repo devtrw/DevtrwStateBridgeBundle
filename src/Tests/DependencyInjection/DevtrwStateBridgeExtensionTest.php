@@ -16,11 +16,10 @@ use Devtrw\StateBridgeBundle\DependencyInjection\DevtrwStateBridgeExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Yaml;
 
-
 /**
  * Class MenuConfigurationTest
  *
- * @author Steven Nance <steven@devtrw.com>
+ * @author  Steven Nance <steven@devtrw.com>
  * @package Devtrw\TrackBundle\Tests\Menu
  */
 class DevtrwStateBridgeExtensionTest extends \PHPUnit_Framework_TestCase
@@ -36,7 +35,7 @@ class DevtrwStateBridgeExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $testConfig      = Yaml::parse(file_get_contents(__DIR__.'/../fixtures/states.yml'));
+        $testConfig = Yaml::parse(file_get_contents(__DIR__ . '/../fixtures/states.yml'));
         $this->container = new ContainerBuilder();
         $extension       = new DevtrwStateBridgeExtension();
         $extension->load($testConfig, $this->container);

@@ -41,6 +41,15 @@ class StateBridgeTest extends \PHPUnit_Framework_TestCase
      */
     private $serializerMock;
 
+    public function setUp()
+    {
+        $this->omMock         = $this->getMock(ObjectManager::class);
+        $this->serializerMock = $this->getMockBuilder(Serializer::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['serialize'])
+            ->getMock();
+    }
+
     public static function setupBeforeClass()
     {
         $config = Yaml::parse(file_get_contents(__DIR__ . '/fixtures/states.yml'));
@@ -50,26 +59,49 @@ class StateBridgeTest extends \PHPUnit_Framework_TestCase
         self::$stateConfigFixture = $container->getParameter('devtrw_state_bridge.states');
     }
 
-    public function setUp()
+    public function testBridgedStateWithAssociatedEntity()
     {
-        $this->omMock         = $this->getMock(ObjectManager::class);
-        $this->serializerMock = $this->getMockBuilder(Serializer::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['serialize'])
-            ->getMock()
-        ;
+        $entityId                 = 123;
+        $stateName                = 'with_entity';
+        $expectedSerializedEntity = ['a' => 'serialized', 'entity'];
+
+        // So we don't have to create a fixture/mock for the entity we
+        // just return $this from the object manager
+        $this->omMock
+            ->expects($this->once())
+            ->method('find')
+            ->with('Devtrw\SomeBundle\Entity\SomeEntity', $entityId)
+            ->will($this->returnValue($this));
+        $this->serializerMock
+            ->expects($this->once())
+            ->method('serialize')
+            ->with($this)
+            ->will($this->returnValue(json_encode($expectedSerializedEntity)));
+
+        $bridge       = $this->createStateBridge();
+        $companyState = $bridge->getBridgedState($stateName, $entityId);
+        $this->assertEquals(
+            $stateName . '_' . $entityId,
+            $companyState['name'],
+            'states resolved with an ID should have the id attribute appended to the state name'
+        );
+        $this->assertArrayHasKey(
+            'entity',
+            $companyState,
+            'states resolved with an ID should return the associated entity details'
+        );
+        $this->assertSame(
+            $expectedSerializedEntity,
+            $companyState['entity'],
+            'The entity returned from the object manager should serialized to an array and be set in the entity field'
+        );
     }
 
-    private function createStateBridge()
+    public function testExceptionRaisedWhenAssociatedEntityNotConfiguredAndEntityIdPassedIn()
     {
-        $securityMock = $this->getMock(SecurityContextInterface::class);
-
-        return new StateBridge(
-            self::$stateConfigFixture,
-            $securityMock,
-            $this->serializerMock,
-            $this->omMock
-        );
+        $this->setExpectedException(MissingStateConfigurationException::class);
+        $bridge = $this->createStateBridge();
+        $bridge->getBridgedState('primary', 1234);
     }
 
     public function testExportedStateIsFormattedCorrectly()
@@ -99,8 +131,16 @@ class StateBridgeTest extends \PHPUnit_Framework_TestCase
         );
 
         $childStateWithChildren = $primaryState['children'][2];
-        $this->assertEquals(false, $childStateWithChildren['abstract'], 'The abstract property should be included in the state');
-        $this->assertEquals(true, $childStateWithChildren['static'], 'The static property should be included in the state');
+        $this->assertEquals(
+            false,
+            $childStateWithChildren['abstract'],
+            'The abstract property should be included in the state'
+        );
+        $this->assertEquals(
+            true,
+            $childStateWithChildren['static'],
+            'The static property should be included in the state'
+        );
         $this->assertEquals(
             'primary_3_child_state',
             $childStateWithChildren['name'],
@@ -126,50 +166,15 @@ class StateBridgeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testExceptionRaisedWhenAssociatedEntityNotConfiguredAndEntityIdPassedIn()
+    private function createStateBridge()
     {
-        $this->setExpectedException(MissingStateConfigurationException::class);
-        $bridge = $this->createStateBridge();
-        $bridge->getBridgedState('primary', 1234);
-    }
+        $securityMock = $this->getMock(SecurityContextInterface::class);
 
-    public function testBridgedStateWithAssociatedEntity()
-    {
-        $entityId  = 123;
-        $stateName = 'with_entity';
-        $expectedSerializedEntity = ['a' => 'serialized', 'entity'];
-
-        // So we don't have to create a fixture/mock for the entity we
-        // just return $this from the object manager
-        $this->omMock
-            ->expects($this->once())
-            ->method('find')
-            ->with('Devtrw\SomeBundle\Entity\SomeEntity', $entityId)
-            ->will($this->returnValue($this))
-        ;
-        $this->serializerMock
-            ->expects($this->once())
-            ->method('serialize')
-            ->with($this)
-            ->will($this->returnValue(json_encode($expectedSerializedEntity)))
-        ;
-
-        $bridge       = $this->createStateBridge();
-        $companyState = $bridge->getBridgedState($stateName, $entityId);
-        $this->assertEquals(
-            $stateName . '_' . $entityId,
-            $companyState['name'],
-            'states resolved with an ID should have the id attribute appended to the state name'
-        );
-        $this->assertArrayHasKey(
-            'entity',
-            $companyState,
-            'states resolved with an ID should return the associated entity details'
-        );
-        $this->assertSame(
-            $expectedSerializedEntity,
-            $companyState['entity'],
-            'The entity returned from the object manager should serialized to an array and be set in the entity field'
+        return new StateBridge(
+            self::$stateConfigFixture,
+            $securityMock,
+            $this->serializerMock,
+            $this->omMock
         );
     }
 }
