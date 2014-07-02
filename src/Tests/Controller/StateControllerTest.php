@@ -105,8 +105,17 @@ class StateControllerTest extends \PHPUnit_Framework_TestCase
      */
     private function assertReturnType($requestFormat, $expectedResponseInstance = null)
     {
+        /**
+         * Make sure the _format param is used instead of request->getRequestFormat by setting the request format
+         * to html and the _format param to the expected value. This handling of setting the request format
+         * is causing issues with legacy projects.
+         *
+         * Related change to symfony code base
+         * @see https://github.com/symfony/symfony/issues/8787
+         */
         $request = new Request();
-        $request->setRequestFormat($requestFormat);
+        $request->setRequestFormat('html');
+        $request->attributes->add(['_format' => $requestFormat]);
         $response = $this->buildController('foo')->indexAction('foo', $request);
         $this->assertInstanceOf($expectedResponseInstance, $response);
 

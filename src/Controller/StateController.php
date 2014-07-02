@@ -64,7 +64,7 @@ class StateController
     private function buildResponse(array $states, Request $request)
     {
         $responseArray   = ['states' => $states];
-        $requestedFormat = $request->getRequestFormat('json');
+        $requestedFormat = $request->attributes->get('_format');
 
         switch ($requestedFormat) {
             case 'json':
